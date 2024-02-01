@@ -1,10 +1,13 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState, useContext } from 'react'
+import { Link ,Navigate } from 'react-router-dom'
 // import { serverUrl } from '../main.jsx';
 import axios from "axios";
 import toast from "react-hot-toast";
+import { Context } from '../main';
 
 const Register = () => {
+
+    const { isAuthenticated, setisAuthenticated } = useContext(Context);
 
     const [name, setname] = useState("");
     const [email, setemail] = useState("");
@@ -24,14 +27,16 @@ const Register = () => {
                 },
                 withCredentials: true
             })
+            setisAuthenticated(true);
             toast.success(data.message);
         } catch (error) {
             toast.error("Some error occured.");
             console.log(error);
+            setisAuthenticated(false);
         }
     }
 
-
+    if (isAuthenticated) { <Navigate to="/"/> }
 
     return (
         <div className="login">
