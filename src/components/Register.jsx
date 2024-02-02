@@ -35,6 +35,7 @@ const Register = () => {
             toast.error("Some error occured.");
             console.log(error);
             setisAuthenticated(false);
+            setloading(false);
         }
     }
 
